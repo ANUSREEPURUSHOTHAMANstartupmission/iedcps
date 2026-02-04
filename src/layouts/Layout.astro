@@ -1,0 +1,117 @@
+---
+const { title } = Astro.props;
+
+import Navbar from "../components/Navbar.astro";
+import Navbarbottom from "../components/Navbar.svelte";
+
+
+const description = "Kerala Startup Mission is the central agency of the Government of Kerala for entrepreneurship development and incubation activities in Kerala, India.";
+const url = "https://startupmission.kerala.gov.in/";
+
+---
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<!-- META -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="robots" content="">    
+    <meta name="description" content="">
+    
+    <!-- FAVICONS ICON -->
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+    
+    <!-- PAGE TITLE HERE -->
+    <title>Creative & Cultural Incubator</title>
+    
+    <!-- MOBILE SPECIFIC -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <!-- BOOTSTRAP STYLE SHEET -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <!-- FONTAWESOME STYLE SHEET -->
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
+
+    <!-- OWL CAROUSEL STYLE SHEET -->
+    <link rel="stylesheet" type="text/css" href="/css/owl.carousel.min.css">
+
+    <!-- SLICK SLIDER STYLE SHEET -->
+    <link rel="stylesheet" type="text/css" href="/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="/css/slick-theme.css">
+        
+    <!-- BOOTSTRAP SLECT BOX STYLE SHEET  -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-select.min.css">    
+    <!-- MAGNIFIC POPUP STYLE SHEET -->
+    <link rel="stylesheet" type="text/css" href="/css/magnific-popup.min.css">
+    <!-- LOADER STYLE SHEET -->
+    <link rel="stylesheet" type="text/css" href="/css/loader.min.css">    
+    <!-- MAIN STYLE SHEET -->
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+        <!-- FLATICON STYLE SHEET -->
+    <link rel="stylesheet" type="text/css" href="/css/flaticon.min.css">  
+    <!-- THEME COLOR CHANGE STYLE SHEET -->
+    <link rel="stylesheet" class="skin" type="text/css" href="/css/skin/skin-1.css">
+    
+    
+  
+       
+     <!-- REVOLUTION SLIDER CSS -->
+    <link rel="stylesheet" type="text/css" href="plugins/revolution/revolution/css/settings.css">
+    <!-- REVOLUTION NAVIGATION STYLE -->
+    <link rel="stylesheet" type="text/css" href="plugins/revolution/revolution/css/navigation.css">
+        
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Muli:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+
+</head>
+
+<body class="">
+
+	<slot />
+
+
+<!-- JAVASCRIPT  FILES ========================================= --> 
+<script src="/js/jquery-3.7.1.min.js" is:inline></script><!-- JQUERY.MIN JS -->
+<script src="/js/popper.min.js" is:inline></script><!-- POPPER.MIN JS -->
+<script src="/js/bootstrap.min.js" is:inline></script><!-- BOOTSTRAP.MIN JS -->
+<script src="/js/bootstrap-select.min.js" is:inline></script><!-- Form js -->
+<script src="/js/magnific-popup.min.js" is:inline></script><!-- MAGNIFIC-POPUP JS -->
+<script src="/js/waypoints.min.js" is:inline></script><!-- WAYPOINTS JS -->
+<script src="/js/counterup.min.js" is:inline></script><!-- COUNTERUP JS -->
+<script src="/js/waypoints-sticky.min.js" is:inline></script><!-- STICKY HEADER -->
+<script src="/js/isotope.pkgd.min.js" is:inline></script><!-- MASONRY  -->
+<script src="/js/imagesloaded.pkgd.min.js" is:inline></script><!-- MASONRY  -->
+<script src="/js/owl.carousel.min.js" is:inline></script><!-- OWL  SLIDER  -->
+<script src="/js/theia-sticky-sidebar.js" is:inline></script><!-- STICKY SIDEBAR  -->
+<script src="/js/jquery.bootstrap-touchspin.js" is:inline></script><!-- FORM JS -->
+<script src="/js/custom.js" is:inline></script><!-- CUSTOM FUCTIONS  -->
+<script src="/js/jquery.bgscroll.js" is:inline></script><!-- BACKGROUND SCROLL -->
+<script src="/js/slick.js" is:inline></script>
+<script src="/js/jquery-ui.js" is:inline></script><!-- Price Range Slider -->
+<script src="/js/switcher.js" is:inline></script><!-- SHORTCODE FUCTIONS  -->
+
+
+
+
+
+<!-- REVOLUTION JS FILES -->
+
+<script  src="plugins/revolution/revolution/js/jquery.themepunch.tools.min.js" is:inline></script>
+<script  src="plugins/revolution/revolution/js/jquery.themepunch.revolution.min.js" is:inline></script>
+
+<!-- SLIDER REVOLUTION 5.0 EXTENSIONS  (Load Extensions only on Local File Systems !  The following part can be removed on Server for On Demand Loading) -->	
+<script  src="plugins/revolution/revolution/js/extensions/revolution-plugin.js" is:inline></script>
+
+<!-- REVOLUTION SLIDER SCRIPT FILES -->
+<script  src="/js/rev-script-1.js" is:inline></script>
+
+
+</body>
+
+</html>

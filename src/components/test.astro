@@ -1,0 +1,153 @@
+---
+const API_URL = "https://api.startupmission.in/webhook/iedc-hackathon-problems";
+
+// Server-side fetch
+const res = await fetch(API_URL);
+const problems = await res.json();
+
+// Unique districts
+const districts = [...new Set(problems.map(p => p.district))];
+---
+
+<section class="py-20 bg-[#F7FBF8]">
+  <div class="max-w-7xl mx-auto px-4">
+
+    <!-- Filters -->
+    <div class="flex flex-col md:flex-row gap-4 mb-12 max-w-3xl mx-auto">
+
+      <!-- District Filter -->
+      <select
+        id="districtFilter"
+        class="w-full rounded-xl border border-[#E3EFE8] bg-white px-4 py-3
+               text-sm text-[#1E5B3A] focus:outline-none focus:ring-2 focus:ring-[#1E5B3A]"
+      >
+        <option value="">Select District</option>
+        {districts.map(d => (
+          <option value={d}>{d}</option>
+        ))}
+      </select>
+
+      <!-- Theme Filter (hidden initially) -->
+      <select
+        id="themeFilter"
+        class="w-full rounded-xl border border-[#E3EFE8] bg-white px-4 py-3
+               text-sm text-[#1E5B3A] focus:outline-none focus:ring-2 focus:ring-[#1E5B3A] hidden"
+      >
+        <option value="">All Themes</option>
+      </select>
+
+    </div>
+
+    <!-- Cards Grid -->
+    <div
+      id="cardsGrid"
+      class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5 hidden"
+    >
+      {problems.map(item => (
+        <div
+          class="problem-card group relative rounded-3xl p-10 bg-[#F2F7F4]
+                 border border-[#E3EFE8] transition-all duration-500
+                 hover:-translate-y-1 hover:shadow-xl"
+          data-district={item.district}
+          data-theme={item.theme}
+        >
+          <!-- Hover Gradient -->
+          <div
+            class="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100
+                   transition-opacity duration-500
+                   bg-gradient-to-br from-[#1e5b3b5f]/90 to-[#2F7D56]/90">
+          </div>
+
+          <div class="relative z-10">
+            <span
+              class="inline-block mb-4 text-xs font-semibold tracking-wider
+                     bg-[#EAF4EF] text-[#125e358f]
+                     px-4 py-1 rounded-full
+                     transition group-hover:bg-white/20 group-hover:text-white"
+            >
+              {item.unique_id}
+            </span>
+
+            <h3
+              class="text-lg md:text-xl font-bold mb-4
+                     text-[#1E5B3A] transition group-hover:text-white"
+            >
+              {item.theme}
+            </h3>
+
+            <p
+              class="text-sm md:text-base text-[#5F7F6B]
+                     transition group-hover:text-white/90 whitespace-pre-line"
+            >
+              {item.problem}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Client-side filtering logic -->
+  <script>
+    const districtFilter = document.getElementById("districtFilter");
+    const themeFilter = document.getElementById("themeFilter");
+    const cardsGrid = document.getElementById("cardsGrid");
+    const cards = document.querySelectorAll(".problem-card");
+
+    function updateThemes(selectedDistrict) {
+      const themes = new Set();
+
+      cards.forEach(card => {
+        if (card.dataset.district === selectedDistrict) {
+          themes.add(card.dataset.theme);
+        }
+      });
+
+      themeFilter.innerHTML = '<option value="">All Themes</option>';
+
+      themes.forEach(theme => {
+        const option = document.createElement("option");
+        option.value = theme;
+        option.textContent = theme;
+        themeFilter.appendChild(option);
+      });
+
+      themeFilter.classList.remove("hidden");
+    }
+
+    function filterCards() {
+      const district = districtFilter.value;
+      const theme = themeFilter.value;
+
+      if (!district) {
+        cardsGrid.classList.add("hidden");
+        themeFilter.classList.add("hidden");
+        return;
+      }
+
+      cardsGrid.classList.remove("hidden");
+
+      cards.forEach(card => {
+        const matchDistrict = card.dataset.district === district;
+        const matchTheme = !theme || card.dataset.theme === theme;
+
+        card.style.display = matchDistrict && matchTheme ? "block" : "none";
+      });
+    }
+
+    districtFilter.addEventListener("change", () => {
+      const district = districtFilter.value;
+
+      if (!district) {
+        cardsGrid.classList.add("hidden");
+        themeFilter.classList.add("hidden");
+        return;
+      }
+
+      updateThemes(district);
+      filterCards();
+    });
+
+    themeFilter.addEventListener("change", filterCards);
+  </script>
+</section>

@@ -1,0 +1,239 @@
+---
+const API_URL = "https://api.startupmission.in/webhook/iedc-hackathon-problems";
+
+// Server-side fetch
+const res = await fetch(API_URL);
+const problems = await res.json();
+
+// Unique districts
+const districts = [...new Set(problems.map(p => p.district))];
+---
+
+<section class="py-20 bg-[#F7FBF8]">
+  <div class="max-w-7xl mx-auto px-4">
+
+    <!-- Filters -->
+    <div class="flex flex-col md:flex-row gap-4 mb-12 max-w-3xl mx-auto">
+
+      <!-- District Filter (Custom Dropdown) -->
+      <div id="districtFilter" class="custom-selectone relative w-full" data-value="">
+        <button
+          type="button"
+          class="trigger w-full rounded-xl border border-[#E3EFE8] bg-white px-4 py-3
+                 text-sm text-[#1E5B3A] text-left flex justify-between items-center"
+        >
+          <span class="label">District of your college</span>
+          <span>▾</span>
+        </button>
+
+        <ul
+          class="options hidden absolute z-20 mt-2 w-full rounded-xl border
+                 border-[#E3EFE8] bg-white max-h-64 overflow-auto"
+        >
+          {districts.map(d => (
+            <li
+              class="option px-4 py-2 text-sm cursor-pointer
+                     hover:bg-[#EAF4EF] text-[#1E5B3A]"
+              data-value={d}
+            >
+              {d}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Theme Filter (Custom Dropdown) -->
+      <div
+        id="themeFilter"
+        class="custom-selectone relative w-full hidden"
+        data-value=""
+      >
+        <button
+          type="button"
+          class="trigger w-full rounded-xl border border-[#E3EFE8] bg-white px-4 py-3
+                 text-sm text-[#1E5B3A] text-left flex justify-between items-center"
+        >
+          <span class="label">All Themes</span>
+          <span>▾</span>
+        </button>
+
+        <ul
+          class="options hidden absolute z-20 mt-2 w-full rounded-xl border
+                 border-[#E3EFE8] bg-white max-h-64 overflow-auto"
+        ></ul>
+      </div>
+
+    </div>
+
+    <!-- Cards Grid -->
+    <div
+      id="cardsGrid"
+      class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5 hidden pt-10"
+    >
+      {problems.map(item => (
+        <div
+          class="problem-card group relative rounded-3xl p-10 bg-[#F2F7F4]
+                 border border-[#E3EFE8] transition-all duration-500
+                 hover:-translate-y-1 hover:shadow-xl relative"
+          data-district={item.district}
+          data-theme={item.theme}
+        >
+        <a target="_blank" href={"https://forms.zohopublic.com/keralastartupmission/form/ClusterlevelHackathonsTemplate/formperma/cfFbIbwiuHcBocamA5cg2-HGLGi-bR55gSyF1TdJiPQ?id="+item.unique_id}>
+          <div
+            class="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100
+                   transition-opacity duration-500
+                   bg-gradient-to-br from-[#1e5b3b5f]/90 to-[#2F7D56]/90">
+          </div>
+
+          <div class="relative z-10">
+            <span
+              class="inline-block mb-4 text-xs font-semibold tracking-wider
+                     bg-[#EAF4EF] text-[#125e358f]
+                     px-4 py-1 rounded-full
+                     transition group-hover:bg-white/20 group-hover:text-white"
+            >
+              {item.unique_id}
+            </span>
+
+            <h3
+              class="text-lg md:text-xl font-bold mb-4
+                     text-[#1E5B3A] transition group-hover:text-white"
+            >
+              {item.theme}
+            </h3>
+
+            <p
+              class="text-sm md:text-base text-[#5F7F6B]
+                     transition group-hover:text-white/90 whitespace-pre-line"
+            >
+              {item.problem}
+            </p>
+
+            <div class="items-end flex justify-end w-full mt-8 ">
+                <div class="bg-white text-[#1E5B3A] rounded-full p-2 text-base ">
+                    <a target="_blank" href={"https://forms.zohopublic.com/keralastartupmission/form/ClusterlevelHackathonsTemplate/formperma/cfFbIbwiuHcBocamA5cg2-HGLGi-bR55gSyF1TdJiPQ?id="+item.unique_id}>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+          </div>
+        </a>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Client-side logic -->
+  <script is:inline>
+    /* ================= CUSTOM SELECT ================= */
+
+    document.querySelectorAll(".custom-selectone").forEach(select => {
+      const trigger = select.querySelector(".trigger");
+      const options = select.querySelector(".options");
+      const label = select.querySelector(".label");
+
+      trigger.addEventListener("click", () => {
+        options.classList.toggle("hidden");
+      });
+
+      options.addEventListener("click", e => {
+        const option = e.target.closest(".option");
+        if (!option) return;
+
+        const value = option.dataset.value;
+        label.textContent = option.textContent;
+        select.dataset.value = value;
+
+        options.classList.add("hidden");
+        select.dispatchEvent(new Event("change"));
+      });
+
+      Object.defineProperty(select, "value", {
+        get() {
+          return this.dataset.value || "";
+        },
+        set(val) {
+          this.dataset.value = val;
+        }
+      });
+    });
+
+    document.addEventListener("click", e => {
+      document.querySelectorAll(".options").forEach(opt => {
+        if (!opt.parentElement.contains(e.target)) {
+          opt.classList.add("hidden");
+        }
+      });
+    });
+
+    /* ================= EXISTING FILTER LOGIC (UNCHANGED) ================= */
+
+    const districtFilter = document.getElementById("districtFilter");
+    const themeFilter = document.getElementById("themeFilter");
+    const cardsGrid = document.getElementById("cardsGrid");
+    const cards = document.querySelectorAll(".problem-card");
+
+    function updateThemes(selectedDistrict) {
+      const themes = new Set();
+      const options = themeFilter.querySelector(".options");
+
+      cards.forEach(card => {
+        if (card.dataset.district === selectedDistrict) {
+          themes.add(card.dataset.theme);
+        }
+      });
+
+      options.innerHTML = "";
+
+      themes.forEach(theme => {
+        const li = document.createElement("li");
+        li.className =
+          "option px-4 py-2 text-sm cursor-pointer hover:bg-[#EAF4EF] text-[#1E5B3A]";
+        li.dataset.value = theme;
+        li.textContent = theme;
+        options.appendChild(li);
+      });
+
+      themeFilter.querySelector(".label").textContent = "All Themes";
+      themeFilter.dataset.value = "";
+      themeFilter.classList.remove("hidden");
+    }
+
+    function filterCards() {
+      const district = districtFilter.value;
+      const theme = themeFilter.value;
+
+      if (!district) {
+        cardsGrid.classList.add("hidden");
+        themeFilter.classList.add("hidden");
+        return;
+      }
+
+      cardsGrid.classList.remove("hidden");
+
+      cards.forEach(card => {
+        const matchDistrict = card.dataset.district === district;
+        const matchTheme = !theme || card.dataset.theme === theme;
+        card.style.display = matchDistrict && matchTheme ? "block" : "none";
+      });
+    }
+
+    districtFilter.addEventListener("change", () => {
+      const district = districtFilter.value;
+
+      if (!district) {
+        cardsGrid.classList.add("hidden");
+        themeFilter.classList.add("hidden");
+        return;
+      }
+
+      updateThemes(district);
+      filterCards();
+    });
+
+    themeFilter.addEventListener("change", filterCards);
+  </script>
+</section>
