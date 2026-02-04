@@ -72,55 +72,31 @@ const districts = [...new Set(problems.map(p => p.district))];
     >
       {problems.map(item => (
         <div
-          class="problem-card group relative rounded-3xl p-10 bg-[#F2F7F4]
-                 border border-[#E3EFE8] transition-all duration-500
-                 hover:-translate-y-1 hover:shadow-xl relative"
-          data-district={item.district}
-          data-theme={item.theme}
-        >
-        <a target="_blank" href={"https://forms.zohopublic.com/keralastartupmission/form/ClusterlevelHackathonsTemplate/formperma/cfFbIbwiuHcBocamA5cg2-HGLGi-bR55gSyF1TdJiPQ?id="+item.unique_id}>
-          <div
-            class="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100
-                   transition-opacity duration-500
-                   bg-gradient-to-br from-[#1e5b3b5f]/90 to-[#2F7D56]/90">
-          </div>
+          class="problem-card group relative rounded-3xl p-10 bg-[#F2F7F4] border border-[#E3EFE8] transition-all duration-500
+                 hover:-translate-y-1 hover:shadow-xl " data-district={item.district} data-theme={item.theme}>
+            <a target="_blank" href={"https://forms.zohopublic.com/keralastartupmission/form/ClusterlevelHackathonsTemplate/formperma/cfFbIbwiuHcBocamA5cg2-HGLGi-bR55gSyF1TdJiPQ?id="+item.unique_id}>
+            <div class="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-[#1e5b3b5f]/90 to-[#2F7D56]/90"></div>
+                <div class="relative  z-10">
+                    <span class="inline-block mb-4 text-xs font-semibold tracking-wider bg-[#EAF4EF] text-[#125e358f] px-4 py-1 rounded-full transition group-hover:bg-white/20 group-hover:text-white">
+                    {item.unique_id}
+                    </span>
 
-          <div class="relative z-10">
-            <span
-              class="inline-block mb-4 text-xs font-semibold tracking-wider
-                     bg-[#EAF4EF] text-[#125e358f]
-                     px-4 py-1 rounded-full
-                     transition group-hover:bg-white/20 group-hover:text-white"
-            >
-              {item.unique_id}
-            </span>
+                    <h3 class="text-lg md:text-xl font-bold mb-2  text-[#1E5B3A] transition group-hover:text-white">{item.theme}</h3>
 
-            <h3
-              class="text-lg md:text-xl font-bold mb-4
-                     text-[#1E5B3A] transition group-hover:text-white"
-            >
-              {item.theme}
-            </h3>
-
-            <p
-              class="text-sm md:text-base text-[#5F7F6B]
-                     transition group-hover:text-white/90 whitespace-pre-line"
-            >
-              {item.problem}
-            </p>
-
-            <div class="items-end flex justify-end w-full mt-8 ">
-                <div class="bg-white text-[#1E5B3A] rounded-full p-2 text-base ">
-                    <a target="_blank" href={"https://forms.zohopublic.com/keralastartupmission/form/ClusterlevelHackathonsTemplate/formperma/cfFbIbwiuHcBocamA5cg2-HGLGi-bR55gSyF1TdJiPQ?id="+item.unique_id}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
-                        </svg>
-                    </a>
+                    <p class="text-sm md:text-base text-[#5F7F6B] transition group-hover:text-white/90 whitespace-pre-line">
+                    {item.problem}
+                    </p>
                 </div>
-            </div>
-
-          </div>
-        </a>
+                 <div class="items-end flex justify-end  w-full h-full">
+                        <div class="bg-white text-[#1E5B3A] rounded-full p-2 text-base bottom-2 right-2 absolute">
+                            <a target="_blank" href={"https://forms.zohopublic.com/keralastartupmission/form/ClusterlevelHackathonsTemplate/formperma/cfFbIbwiuHcBocamA5cg2-HGLGi-bR55gSyF1TdJiPQ?id="+item.unique_id}>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+            </a>
         </div>
       ))}
     </div>
