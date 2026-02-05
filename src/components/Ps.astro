@@ -53,7 +53,7 @@ const districts = [...new Set(problems.map(p => p.district))];
           class="trigger w-full rounded-xl border border-[#E3EFE8] bg-white px-4 py-3
                  text-sm text-[#1E5B3A] text-left flex justify-between items-center"
         >
-          <span class="label">All Themes</span>
+          <span class="label">Select your theme</span>
           <span>▾</span>
         </button>
 
@@ -87,13 +87,16 @@ const districts = [...new Set(problems.map(p => p.district))];
                     {item.problem}
                     </p>
                 </div>
-                 <div class="items-end flex justify-end  w-full h-full">
-                        <div class="bg-white text-[#1E5B3A] rounded-full p-2 text-base bottom-2 right-2 absolute">
-                            <a target="_blank" href={"https://forms.zohopublic.com/keralastartupmission/form/ClusterlevelHackathonsTemplate/formperma/cfFbIbwiuHcBocamA5cg2-HGLGi-bR55gSyF1TdJiPQ?id="+item.unique_id}>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
-                                </svg>
-                            </a>
+                 <div class="items-end flex justify-end  w-full h-full mt-3">
+                        <div class="bg-white text-[#1E5B3A] rounded-full p-2 text-base bottom-2 right-2 absolute border border-[#0c542a]">
+                            <div class="flex gap-2 items-center justify-center text-center font-semibold text-sm">
+                                <h1>Apply Now </h1>
+                                <a target="_blank" href={"https://forms.zohopublic.com/keralastartupmission/form/ClusterlevelHackathonsTemplate/formperma/cfFbIbwiuHcBocamA5cg2-HGLGi-bR55gSyF1TdJiPQ?id="+item.unique_id}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
             </a>
@@ -173,7 +176,7 @@ const districts = [...new Set(problems.map(p => p.district))];
         options.appendChild(li);
       });
 
-      themeFilter.querySelector(".label").textContent = "All Themes";
+      themeFilter.querySelector(".label").textContent = "Select your theme";
       themeFilter.dataset.value = "";
       themeFilter.classList.remove("hidden");
     }
